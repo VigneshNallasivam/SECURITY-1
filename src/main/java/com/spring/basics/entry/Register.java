@@ -13,6 +13,6 @@ public class Register
 {
     private String name;
     private String mail;
-    private List<String> roles;
     private String password;
+    private List<String> roles;
 }

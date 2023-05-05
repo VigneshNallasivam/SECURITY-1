@@ -17,4 +17,8 @@ public class Salary
     @GeneratedValue(strategy = GenerationType.AUTO)
     private int salaryId;
     private String salary;
+
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "emp_id",referencedColumnName = "emp_id")
+    private Employee employee;
 }

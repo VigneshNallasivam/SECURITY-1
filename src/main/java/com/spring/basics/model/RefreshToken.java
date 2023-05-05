@@ -8,7 +8,6 @@ import javax.persistence.*;
 import java.time.Instant;
 
 @Entity
-@Table(name = "refresh_token")
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
@@ -19,7 +18,7 @@ public class RefreshToken
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
 
-    @OneToOne
+    @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "emp_id", referencedColumnName = "emp_id")
     private Employee employee;
 

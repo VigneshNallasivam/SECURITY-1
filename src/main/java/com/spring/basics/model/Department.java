@@ -19,4 +19,8 @@ public class Department
     private String deptName;
     private String deptStrength;
     private String deptLevel;
+
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "emp_id",referencedColumnName = "emp_id")
+    private Employee employee;
 }

@@ -1,4 +1,4 @@
-package com.spring.basics.security;
+package com.spring.basics.service;
 
 import com.spring.basics.exception.JWTSecurityException;
 import com.spring.basics.model.RefreshToken;

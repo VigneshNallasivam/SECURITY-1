@@ -3,16 +3,20 @@ package com.spring.basics.controller;
 import com.spring.basics.entry.ERole;
 import com.spring.basics.entry.Login;
 import com.spring.basics.entry.Register;
+import com.spring.basics.model.Department;
 import com.spring.basics.model.Employee;
 import com.spring.basics.model.RefreshToken;
 import com.spring.basics.model.Role;
 import com.spring.basics.response.Message;
 import com.spring.basics.security.JwtUtils;
-import com.spring.basics.security.RefreshTokenService;
+import com.spring.basics.service.PaginationService;
+import com.spring.basics.service.RefreshTokenService;
 import com.spring.basics.security.UserDetailsImpl;
 import com.spring.basics.security.UserInfoResponse;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseCookie;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -25,6 +29,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 @RestController
@@ -43,6 +48,9 @@ public class CompanyController
     RefreshTokenService refreshTokenService;
     @Autowired
     RoleRepository roleRepository;
+
+    @Autowired
+    PaginationService service;
 
     @PostMapping("/register")
     public ResponseEntity<?> register(@RequestBody Register register)
@@ -126,4 +134,30 @@ public class CompanyController
         return ResponseEntity.ok().header(HttpHeaders.SET_COOKIE, cookie.toString())
                 .body(new Message("You've been signed out!"));
     }
+
+    @GetMapping("/pageGet")
+    public ResponseEntity<List<Employee>> getAllPages(
+            @RequestParam(defaultValue = "0") Integer pageNo,
+            @RequestParam(defaultValue = "10") Integer pageSize,
+            @RequestParam(defaultValue = "empId") String sortBy
+            )
+    {
+        List<Employee> list = service.getAllPages(pageNo, pageSize, sortBy);
+        return new ResponseEntity<List<Employee>>(list, new HttpHeaders(), HttpStatus.OK);
+    }
+
+//    @GetMapping("/filterFindByDepartmentName")
+//    public Optional<Department> findByDepartmentName(@RequestParam(defaultValue = "") String deptName)
+//    {
+//        return service.findByDeptNames(deptName);
+//    }
+    @GetMapping("/pageFilterFindByDepartmentName")
+    public Page<Department> findByDepartmentName(@RequestParam(defaultValue = "0") Integer pageNo,
+                                                 @RequestParam(defaultValue = "10") Integer pageSize,
+                                                 @RequestParam(defaultValue = "deptId") String sortBy,
+                                                 @RequestParam(defaultValue = "") String deptName)
+    {
+        return service.findByDeptName(pageNo,pageSize,sortBy,deptName);
+    }
+
 }
