@@ -53,6 +53,17 @@ public class DepartmentController
         return ResponseHandler.generateResponse("Data Deletion = Success",true, HttpStatus.GONE,response);
     }
 
+    @GetMapping("/deptSortByLevelAsc")
+    public List<Department> getByLevelAsc()
+    {
+        return service.getByDeptLevelAsc();
+    }
+    @GetMapping("/deptSortByLevelDesc")
+    public List<Department> getByLevelDesc()
+    {
+        return service.getByDeptLevelDesc();
+    }
+
 
 
 }

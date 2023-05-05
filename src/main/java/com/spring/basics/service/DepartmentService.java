@@ -3,6 +3,7 @@ package com.spring.basics.service;
 import com.spring.basics.exception.DepartmentException;
 import com.spring.basics.model.Department;
 import com.spring.basics.repository.DepartmentRepository;
+import com.spring.basics.repository.DepartmentRepository2;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import java.util.List;
@@ -12,6 +13,10 @@ public class DepartmentService
 {
     @Autowired
     DepartmentRepository repo;
+
+    @Autowired
+    DepartmentRepository2 repo2;
+
     public Department create(Department department)
     {
         return repo.save(department);
@@ -59,5 +64,12 @@ public class DepartmentService
             throw new DepartmentException("ID IS NOT-FOUND..!!(TO BE DELETED)");
         }
     }
-
+    public List<Department> getByDeptLevelAsc()
+    {
+        return repo2.findDepartmentLevelByAsc();
+    }
+    public List<Department> getByDeptLevelDesc()
+    {
+        return repo2.findDepartmentLevelByDesc();
+    }
 }
