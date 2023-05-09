@@ -68,5 +68,10 @@ public class EmployeeController
         Response responseDto = new Response("Name Obtained!",employee);
         return new ResponseEntity<>(responseDto,HttpStatus.FOUND);
     }
+    @GetMapping("/getByAgeGreaterThanEqualTo")
+    public List<Employee> getByAge(@RequestParam String age)
+    {
+        return service.findByAgeGreaterThan(age);
+    }
 
 }

@@ -19,6 +19,8 @@ public interface EmployeeRepository extends JpaRepository<Employee,Integer>
     Boolean existsByName(String name);
 
     Boolean existsByMail(String mail);
+    @Query(value = "SELECT e FROM Employee e WHERE e.age >= ?1")
+    List<Employee> findByAgeGreaterThan(String age);
 
 
 }

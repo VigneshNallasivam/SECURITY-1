@@ -92,4 +92,8 @@ public class EmployeeService
         }
 
     }
+    public List<Employee> findByAgeGreaterThan(String age)
+    {
+        return repo.findByAgeGreaterThan(age);
+    }
 }

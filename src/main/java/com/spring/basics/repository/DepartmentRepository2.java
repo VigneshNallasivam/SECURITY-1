@@ -1,12 +1,10 @@
 package com.spring.basics.repository;
 
 import com.spring.basics.model.Department;
-import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.PagingAndSortingRepository;
 import org.springframework.stereotype.Repository;
 
-import javax.transaction.Transactional;
 import java.util.List;
 @Repository
 public interface DepartmentRepository2 extends PagingAndSortingRepository<Department,Integer>
@@ -16,4 +14,6 @@ public interface DepartmentRepository2 extends PagingAndSortingRepository<Depart
 
     @Query(value = "SELECT d from Department d order by d.deptLevel desc")
     List<Department> findDepartmentLevelByDesc();
+
+
 }

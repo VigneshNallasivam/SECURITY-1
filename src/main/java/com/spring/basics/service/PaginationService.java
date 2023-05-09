@@ -42,8 +42,4 @@ public class PaginationService
         return departmentRepository.findByDeptName(pageable,deptName);
     }
 
-//    public Optional<Department> findByDeptNames(String deptName)
-//    {
-//        return departmentRepository.findByDeptNames(deptName);
-//    }
 }

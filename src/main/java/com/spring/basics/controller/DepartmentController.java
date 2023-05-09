@@ -10,6 +10,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 @RequestMapping("/dept")
@@ -63,7 +64,28 @@ public class DepartmentController
     {
         return service.getByDeptLevelDesc();
     }
+    @GetMapping("/getByDeptLevelGreaterThan")
+    public List<Department> getByDeptLevel(@RequestParam String deptLevel)
+    {
+        return service.findByLevelGreaterThan(deptLevel);
+    }
+    @GetMapping("/getByDeptName/{deptName}")
+    public List<Department> getByDeptName(@PathVariable String deptName)
+    {
+        return service.getDeptName(deptName);
+    }
 
+    @GetMapping("/getByDeptNameOrLevel/{deptName}/{deptLevel}")
+    public List<Department> getByDeptNameOrLevels(@PathVariable String deptName,@PathVariable String deptLevel)
+    {
+        return service.getDeptNameOrDeptLevel(deptName,deptLevel);
+    }
+
+    @GetMapping("/getByDeptSalaryLevel")
+    public List<Department> getByDeptSalaryLevels()
+    {
+        return service.findDepartmentSalaryByDesc();
+    }
 
 
 }

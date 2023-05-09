@@ -146,11 +146,6 @@ public class CompanyController
         return new ResponseEntity<List<Employee>>(list, new HttpHeaders(), HttpStatus.OK);
     }
 
-//    @GetMapping("/filterFindByDepartmentName")
-//    public Optional<Department> findByDepartmentName(@RequestParam(defaultValue = "") String deptName)
-//    {
-//        return service.findByDeptNames(deptName);
-//    }
     @GetMapping("/pageFilterFindByDepartmentName")
     public Page<Department> findByDepartmentName(@RequestParam(defaultValue = "0") Integer pageNo,
                                                  @RequestParam(defaultValue = "10") Integer pageSize,

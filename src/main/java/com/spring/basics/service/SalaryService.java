@@ -1,10 +1,14 @@
 package com.spring.basics.service;
 
 import com.spring.basics.exception.SalaryException;
+import com.spring.basics.model.Department;
 import com.spring.basics.model.Salary;
 import com.spring.basics.repository.SalaryRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import javax.persistence.EntityManager;
+import javax.persistence.TypedQuery;
 import java.util.List;
 
 @Service
@@ -57,4 +61,11 @@ public class SalaryService
             throw new SalaryException("ID IS NOT-FOUND..!!(TO BE DELETED)");
         }
     }
+
+    public List<Salary> salaryBetween(String start,String end)
+    {
+        return repo.salaryBetween(start,end);
+    }
+
+
 }

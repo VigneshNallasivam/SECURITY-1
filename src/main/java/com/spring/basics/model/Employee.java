@@ -20,12 +20,14 @@ public class Employee
     private String name;
     private String gender;
     private String age;
+    private String domain;
+    private String designation;
     private String address;
     private String mobile;
     private String mail;
     private String password;
 
-    @ManyToMany(fetch = FetchType.LAZY)
+    @ManyToMany(fetch = FetchType.LAZY,cascade = CascadeType.ALL)
     @JoinTable(name = "emp_roles", joinColumns = @JoinColumn(name = "emp_id"), inverseJoinColumns = @JoinColumn(name = "role_id"))
     private List<Role> roles;
 

@@ -5,8 +5,10 @@ import com.spring.basics.model.Department;
 import com.spring.basics.repository.DepartmentRepository;
 import com.spring.basics.repository.DepartmentRepository2;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Service;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class DepartmentService
@@ -72,4 +74,24 @@ public class DepartmentService
     {
         return repo2.findDepartmentLevelByDesc();
     }
+    public List<Department> findByLevelGreaterThan(String deptLevel)
+    {
+        return repo.findByLevelGreaterThan(deptLevel);
+    }
+
+    public List<Department> getDeptName(@Param("n") String deptName)
+    {
+        return repo.getDeptName(deptName);
+    }
+
+    public List<Department> getDeptNameOrDeptLevel(String deptName,String deptLevel)
+    {
+        return repo.getDeptNameOrDeptLevel(deptName,deptLevel);
+    }
+
+    public List<Department> findDepartmentSalaryByDesc()
+    {
+        return repo.findDepartmentSalaryByDesc();
+    }
+
 }

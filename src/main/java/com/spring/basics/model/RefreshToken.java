@@ -17,14 +17,10 @@ public class RefreshToken
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
-
+    private String token;
+    private Instant expiryDate;
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "emp_id", referencedColumnName = "emp_id")
     private Employee employee;
-
-    private String token;
-
-    private Instant expiryDate;
-
 
 }

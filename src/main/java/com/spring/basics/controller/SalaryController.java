@@ -1,5 +1,6 @@
 package com.spring.basics.controller;
 
+import com.spring.basics.model.Department;
 import com.spring.basics.model.Salary;
 import com.spring.basics.response.Response;
 import com.spring.basics.response.ResponseHandler;
@@ -9,6 +10,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 @RequestMapping("/salary")
@@ -44,12 +46,19 @@ public class SalaryController
         Response response = new Response("Data is Fetched/Readed..!!",salary);
         return ResponseHandler.generateResponse("Data Reading = Success",true, HttpStatus.FOUND,response);
     }
-    @DeleteMapping("/salaryDelete/{empId}")
+    @DeleteMapping("/salaryDelete/{salaryId}")
     public ResponseEntity<Object> delete(@PathVariable int salaryId)
     {
         service.delete(salaryId);
         Response response = new Response("Data is Deleted..!!","Success..!!");
         return ResponseHandler.generateResponse("Data Deletion = Success",true, HttpStatus.GONE,response);
     }
+    @GetMapping("/salaryBetween/{start}")
+    public List<Salary> getSalaryBetween(@PathVariable String start,@RequestParam String end)
+    {
+        return service.salaryBetween(start,end);
+    }
+
+
 
 }
