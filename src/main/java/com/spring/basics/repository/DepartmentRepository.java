@@ -1,7 +1,7 @@
 package com.spring.basics.repository;
 
 import com.spring.basics.model.Department;
-import com.spring.basics.model.Employee;
+import com.spring.basics.response.ResponsePercent;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -10,7 +10,6 @@ import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
-import java.util.Optional;
 
 @Repository
 public interface DepartmentRepository extends JpaRepository<Department,Integer>
@@ -35,5 +34,21 @@ public interface DepartmentRepository extends JpaRepository<Department,Integer>
 
     @Query(value = "SELECT d from Department d order by d.salaried.salary desc")
     List<Department> findDepartmentSalaryByDesc();
+
+//    @Query(value = "SELECT d.deptName from Department d COUNT(d.employee) GROUP BY d.deptName")
+//    List<Department> percentageOFEmployeeInDepartment();
+
+//    @Query(value = "SELECT d.deptName, (COUNT(d.employee.empId) * 100.0) / (SELECT COUNT(e.empId) FROM Employee e)AS percentage FROM Employee e JOIN e.department d on d.deptId=e.department.deptId GROUP BY d.deptName")
+//    List<Department> percentageOFEmployeeInDepartment();
+
+
+
+//@Query(value = "SELECT d.deptName,SUM(d.employee.empId),( (d.employee.empId ) / SUM(d.employee.empId) * 100 )FROM departments d GROUP BY d.deptName")
+//List<Department> percentageOFEmployeeInDepartment();
+//@Query(value = "SELECT d.employee.empId,d.employee.empId * 100/(SELECT SUM(d.employee.empId) FROM Department d) as 'deptStrength' FROM Department d")
+//List<Department> percentageOFEmployeeInDepartment();
+
+    @Query(value = "SELECT new com.spring.basics.response.ResponsePercent(d.deptName, COUNT(e.empId) * 100.0 / (SELECT COUNT(e.empId) FROM Employee e))"+" FROM Employee e JOIN e.department d GROUP BY d.deptName")
+    List<ResponsePercent> percentageOFEmployeeInDepartment();
 
 }

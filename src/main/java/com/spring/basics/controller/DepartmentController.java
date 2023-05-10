@@ -3,6 +3,7 @@ package com.spring.basics.controller;
 import com.spring.basics.model.Department;
 import com.spring.basics.response.Response;
 import com.spring.basics.response.ResponseHandler;
+import com.spring.basics.response.ResponsePercent;
 import com.spring.basics.service.DepartmentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -10,7 +11,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-import java.util.Optional;
 
 @RestController
 @RequestMapping("/dept")
@@ -85,6 +85,11 @@ public class DepartmentController
     public List<Department> getByDeptSalaryLevels()
     {
         return service.findDepartmentSalaryByDesc();
+    }
+    @GetMapping("/getDeptStrengthAtEachLevel")
+    public List<ResponsePercent> getDeptStrength()
+    {
+        return service.findDeptStrengthAtEveryLevel();
     }
 
 

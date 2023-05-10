@@ -74,4 +74,10 @@ public class EmployeeController
         return service.findByAgeGreaterThan(age);
     }
 
+    @GetMapping("/getEmployeeCount")
+    public Long getEmployeeCount()
+    {
+        return service.getCountForEmployeeId();
+    }
+
 }

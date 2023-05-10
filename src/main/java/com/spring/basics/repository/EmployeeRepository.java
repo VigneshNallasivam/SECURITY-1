@@ -22,5 +22,8 @@ public interface EmployeeRepository extends JpaRepository<Employee,Integer>
     @Query(value = "SELECT e FROM Employee e WHERE e.age >= ?1")
     List<Employee> findByAgeGreaterThan(String age);
 
+    @Query(value = "SELECT COUNT(e.empId) from Employee e")
+    Long getEmployeeCount();
+
 
 }

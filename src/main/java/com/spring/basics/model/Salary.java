@@ -16,6 +16,7 @@ public class Salary
 {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
+    @Column(name = "salary_id")
     private int salaryId;
     private String accNo;
     private String salaryBankAccName;

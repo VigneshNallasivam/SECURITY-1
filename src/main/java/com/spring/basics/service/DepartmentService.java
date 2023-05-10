@@ -4,11 +4,13 @@ import com.spring.basics.exception.DepartmentException;
 import com.spring.basics.model.Department;
 import com.spring.basics.repository.DepartmentRepository;
 import com.spring.basics.repository.DepartmentRepository2;
+import com.spring.basics.repository.EmployeeRepository;
+import com.spring.basics.response.ResponsePercent;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Service;
+
 import java.util.List;
-import java.util.Optional;
 
 @Service
 public class DepartmentService
@@ -18,6 +20,9 @@ public class DepartmentService
 
     @Autowired
     DepartmentRepository2 repo2;
+
+    @Autowired
+    EmployeeRepository employeeRepository;
 
     public Department create(Department department)
     {
@@ -93,5 +98,27 @@ public class DepartmentService
     {
         return repo.findDepartmentSalaryByDesc();
     }
+
+//    public List<PercentageResponse> findDeptStrengthAtEveryLevel()
+//    {
+//        List<PercentageResponse> list = repo.percentageOFEmployeeInDepartment();
+//        System.out.println(list);
+//        return repo.percentageOFEmployeeInDepartment();
+//    }
+    public List<ResponsePercent> findDeptStrengthAtEveryLevel()
+    {
+        return repo.percentageOFEmployeeInDepartment();
+    }
+
+
+//    public Map<String,Long> findDeptStrengthAtEveryLevel()
+//    {
+//        Map<String,Long> map = new HashMap<>();
+//        Long empCount = employeeRepository.getEmployeeCount();
+//        List<Department> departments = repo.
+//        map.put(departments, empCount);
+//        return map;
+//    }
+
 
 }

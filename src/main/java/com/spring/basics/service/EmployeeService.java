@@ -96,4 +96,9 @@ public class EmployeeService
     {
         return repo.findByAgeGreaterThan(age);
     }
+
+    public Long getCountForEmployeeId()
+    {
+        return repo.getEmployeeCount();
+    }
 }

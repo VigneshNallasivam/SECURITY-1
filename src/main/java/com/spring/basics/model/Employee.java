@@ -1,5 +1,7 @@
 package com.spring.basics.model;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonInclude;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -11,6 +13,7 @@ import java.util.List;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
+//@JsonInclude(JsonInclude.Include.NON_NULL)
 public class Employee
 {
     @Id
@@ -30,6 +33,11 @@ public class Employee
     @ManyToMany(fetch = FetchType.LAZY,cascade = CascadeType.ALL)
     @JoinTable(name = "emp_roles", joinColumns = @JoinColumn(name = "emp_id"), inverseJoinColumns = @JoinColumn(name = "role_id"))
     private List<Role> roles;
+
+    @OneToOne(fetch = FetchType.LAZY,cascade = CascadeType.ALL)
+    @JoinColumn(name = "dept_id",referencedColumnName = "deptId")
+    @JsonBackReference
+    private Department department;
 
     public Employee(String name,String mail,String password)
     {
